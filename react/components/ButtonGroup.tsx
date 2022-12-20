@@ -13,7 +13,7 @@ const ButtonGroup = () => {
                 SEGUIR COMPRANDO
             </button>
             <a href="/">
-                VER CARRITO
+                VER RESUMEN DEL CARRITO
             </a>
         </div>
         </>

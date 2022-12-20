@@ -2,21 +2,48 @@ import React from "react";
 import { useProduct } from "vtex.product-context";
 import { useOrderForm } from "vtex.order-manager/OrderForm"
 import ButtonGroup from "./ButtonGroup";
+import { generateBlockClass } from "@vtex/css-handles";
+import styles from "./styles.css"
 
-const AddToCartInfo = () => {
+const AddToCartInfo = ({blockClass}: {blockClass: string}) => {
+    const container = generateBlockClass(styles.container, blockClass)
+    const container__item = generateBlockClass(styles.container__item, blockClass)
     const productInfo = useProduct();
-    const { orderform: {
+    const { orderForm: {
         items,
         totalizers
     } } = useOrderForm();
     console.log("este producto tiene esta info: ", productInfo)
-    console.log("esta es la información de la orden: ", items, totalizers)
+    console.log("estos son mis totales: ", totalizers[0])
     return(
-        <>
-        <ProductGroup/> {/*Listado de productos*/}
-        <Totalizers/>   {/*Valor total*/}
+        <div className={container}>
+        {/*<ProductGroup products={item}/> Listado de productos*/}
+        {
+        items.map((item: any, index: number) => {
+            return (
+                <div key={index} className={container__item}>
+                    <div>
+                        <img src={item.imageUrls.at1x}/>
+                    </div>
+                    <div>
+                        <p>{item.name}</p>
+                        <p>{item.id}</p>
+                        <p>${item.price/100}</p>
+                        <p>Cant: {item.quantity}</p>
+
+                    </div>
+                </div>
+            )
+        })
+        }
+         <div>
+            <h3>AGREGADO AL CARRITO:</h3>
+            <p>{items.length} artículos</p>
+            <p>Subtotal: ${totalizers[0]?.value/100}</p>
+        </div>
+        {/*<Totalizers totalizers={totalizers[0]}/>   Valor total*/}
         <ButtonGroup/> {/*Acciones*/}
-        </>
+        </div>
     )
 }
 

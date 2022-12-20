@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "vtex.checkout-resources": "0.x",
-    "vtex.order.manager": "0.x",
+    "vtex.order-manager": "0.x",
     "vtex.product-context": "0.x"
   },
   "registries": [
