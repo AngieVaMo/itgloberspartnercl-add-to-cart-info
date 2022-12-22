@@ -8,6 +8,8 @@ import styles from "./styles.css"
 const AddToCartInfo = ({blockClass}: {blockClass: string}) => {
     const container = generateBlockClass(styles.container, blockClass)
     const container__item = generateBlockClass(styles.container__item, blockClass)
+    const container__image = generateBlockClass(styles.container__image, blockClass)
+
     const productInfo = useProduct();
     const { orderForm: {
         items,
@@ -22,12 +24,12 @@ const AddToCartInfo = ({blockClass}: {blockClass: string}) => {
         items.map((item: any, index: number) => {
             return (
                 <div key={index} className={container__item}>
-                    <div>
+                    <div className={container__image}>
                         <img src={item.imageUrls.at1x}/>
                     </div>
                     <div>
                         <p>{item.name}</p>
-                        <p>{item.id}</p>
+                        {/* <p>{item.id}</p> */}
                         <p>${item.price/100}</p>
                         <p>Cant: {item.quantity}</p>
 
@@ -36,10 +38,10 @@ const AddToCartInfo = ({blockClass}: {blockClass: string}) => {
             )
         })
         }
-         <div>
-            <h3>AGREGADO AL CARRITO:</h3>
+        <div className="bl b--gray pa3">
+            <h3 className="ma0">AGREGADO AL CARRITO:</h3>
             <p>{items.length} artículos</p>
-            <p>Subtotal: ${totalizers[0]?.value/100}</p>
+            <h4>Subtotal: ${totalizers[0]?.value/100}</h4>
         </div>
         {/*<Totalizers totalizers={totalizers[0]}/>   Valor total*/}
         <ButtonGroup/> {/*Acciones*/}
